@@ -65,7 +65,6 @@ export function ScrollScrubHero() {
   const barsRef = useRef<HTMLDivElement>(null);
   const uiRootRef = useRef<HTMLDivElement>(null);
   const brandRef = useRef<HTMLParagraphElement>(null);
-  const meterRef = useRef<HTMLParagraphElement>(null);
 
   const rafRef = useRef<number | null>(null);
   const pendingTimeRef = useRef<number | null>(null);
@@ -74,7 +73,6 @@ export function ScrollScrubHero() {
   const storyProgressRef = useRef(0);
 
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const [ready, setReady] = useState(false);
   const [storyProgress, setStoryProgress] = useState(0);
 
   useEffect(() => {
@@ -107,11 +105,6 @@ export function ScrollScrubHero() {
       if (brandRef.current) {
         brandRef.current.style.opacity = String(0.85 + productLift * 0.15);
         brandRef.current.style.transform = `translateY(${(1 - productLift) * 8}px)`;
-      }
-
-      if (meterRef.current && durationRef.current > 0) {
-        const storyPct = Math.round(productProgress * 100);
-        meterRef.current.textContent = `${Math.round(videoProgress * 100)}% · ${(videoProgress * durationRef.current).toFixed(1)}s · story ${storyPct}%`;
       }
 
       uiRootRef.current?.style.setProperty(
@@ -174,7 +167,6 @@ export function ScrollScrubHero() {
 
     const onLoadedMeta = () => {
       durationRef.current = video.duration;
-      setReady(true);
       update();
     };
 
@@ -263,7 +255,7 @@ export function ScrollScrubHero() {
 
         <div
           ref={uiRootRef}
-          className="relative z-30 flex h-full flex-col justify-between px-6 py-8 sm:px-10 sm:py-10 lg:px-16"
+          className="relative z-30 flex h-full flex-col px-6 py-8 sm:px-10 sm:py-10 lg:px-16"
         >
           <header className="flex items-baseline justify-between gap-4">
             <p
@@ -276,19 +268,6 @@ export function ScrollScrubHero() {
               Sparkling citrus
             </p>
           </header>
-
-          <div className="flex items-end justify-between gap-4 text-[var(--citrus-foam)]/65">
-            <p className="text-xs tracking-[0.2em] uppercase">
-              Scroll to advance
-            </p>
-            <p
-              ref={meterRef}
-              className="font-mono text-xs tabular-nums"
-              aria-live="polite"
-            >
-              {ready ? "0% · 0.0s · story 0%" : "Loading…"}
-            </p>
-          </div>
         </div>
       </div>
     </section>
