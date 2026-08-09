@@ -1,0 +1,123 @@
+CITRA can image prompts
+=======================
+Purpose: Website product overlays matching citrus splash hero video
+Count: 5 variants
+Updated: camera lock + fresher green citrus direction + transparent BG
+
+------------------------------------------------------------------------
+COMMON (prepend to every variant)
+------------------------------------------------------------------------
+
+Photoreal product packshot of ONE slim 330ml aluminum beverage can.
+
+CAMERA LOCK (must be identical across all 5 images):
+- Locked-off tripod camera, eye-level
+- Exact same distance, focal length feel (approx. 85mm product lens)
+- Exact same three-quarter angle: can rotated ~25 degrees to the right
+- Exact same framing: can centered vertically, full can visible with equal margins
+- Same can scale in frame (can height fills ~70% of image height)
+- No camera move, no zoom difference, no tilt difference between variants
+- Straight horizon, no Dutch angle
+
+CAN GEOMETRY (must be identical):
+- Same slim can proportions, same lid, same pull-tab orientation
+- Same grounding shadow style (soft contact shadow only)
+- No cropped edges
+
+BACKGROUND:
+- Fully transparent background (PNG with alpha)
+- No floor, no seamless paper, no water scene, no props behind the can
+- Isolated product only
+
+BRAND / STYLE:
+- Fictional brand wordmark: "CITRA"
+- Fresh, juicy, modern premium sparkling citrus drink
+- Green citrus direction (lime–green citrus / green mandarin feel), NOT yellow lemon
+- Avoid cheap clipart, avoid cluttered stickers, avoid comic outlines
+- Clean contemporary label: generous whitespace OR clear color fields, refined typography
+- Condensation / mist allowed only on the can metal, subtle
+- No people, no extra logos, no watermark, no Japanese text
+- Soft daylight product lighting, crisp metal reflections
+
+OUTPUT:
+- Single can, transparent background, high resolution, sharp label type
+
+------------------------------------------------------------------------
+VARIANT 1 — Green Grove Fresh
+------------------------------------------------------------------------
+
+[COMMON]
+
+Label concept: Green Grove Fresh.
+- Soft matte foam-cream can body
+- Large "CITRA" wordmark in deep leaf green
+- One whole green citrus (round, lime-green peel) as the hero motif, realistic and appetizing
+- Tiny leaf accents only; lots of clean negative space
+- Microcopy: "SPARKLING CITRUS"
+Mood: quiet grocery-premium freshness, dewy and clean.
+Keep design elegant, not busy.
+
+------------------------------------------------------------------------
+VARIANT 2 — Juicy Half-Cut
+------------------------------------------------------------------------
+
+[COMMON]
+
+Label concept: Juicy Half-Cut.
+- Fresh white/cream can with a vivid cross-section of green citrus cut in half
+- Show juicy pulp segments, glistening juice, bright green rind
+- Composition: oversized half-cut citrus as the central label image (appetizing food photography style)
+- "CITRA" above the cut fruit in confident modern sans
+- Microcopy: "FRESH CUT · COLD FIZZ"
+Mood: ultra juicy, hydrating, morning-fresh.
+Avoid lemon-yellow pulp; keep pulp pale green–amber citrus.
+
+------------------------------------------------------------------------
+VARIANT 3 — Misty Green Splash
+------------------------------------------------------------------------
+
+[COMMON]
+
+Label concept: Misty Green Splash.
+- Soft gradient can from pale mint to deeper citrus leaf green
+- Minimal graphic: thin water-droplet ring and a small green citrus orb
+- High-end beauty-beverage look; restrained ink coverage
+- "CITRA" in foam-cream lettering centered
+- Microcopy: "CRISP · BRIGHT · GREEN"
+Mood: mizumizushii (watery freshness), spa-like, light.
+Do not overcrowd; premium minimal packaging.
+
+------------------------------------------------------------------------
+VARIANT 4 — Dual Citrus Duo
+------------------------------------------------------------------------
+
+[COMMON]
+
+Label concept: Dual Citrus Duo.
+- Split label: left side whole green citrus, right side half-cut juicy citrus (same fruit family)
+- Clean vertical divider, modern SKU system look
+- "CITRA" spanning the top as a single wordmark
+- Microcopy: "GREEN CITRUS SPARKLING"
+Mood: catalog-friendly variant that still feels fresh and juicy.
+Keep geometry and camera identical to other variants; only label art changes.
+
+------------------------------------------------------------------------
+VARIANT 5 — Peel & Pulp Ribbon
+------------------------------------------------------------------------
+
+[COMMON]
+
+Label concept: Peel & Pulp Ribbon.
+- Cream can with a continuous green citrus peel ribbon curling around the midsection
+- Inside the ribbon curve, a glimpse of juicy half-cut pulp
+- Contemporary Japanese-adjacent premium soft drink aesthetic without using Japanese characters
+- "CITRA" stacked cleanly on the upper third
+- Microcopy: "TASTE THE CUT"
+Mood: design-forward, still fresh/juicy, not childish.
+Avoid neon colors and sticker-bomb layout.
+
+------------------------------------------------------------------------
+NEGATIVE PROMPTS (optional, apply to all)
+------------------------------------------------------------------------
+
+lemon-shaped fruit, pure lemon yellow, elongated lemon, cluttered label, too many icons, comic outline, low-quality packaging, warped can, different camera angle, different can size, cropped can, opaque background, table surface, water splash background, people, watermark, extra brands, busy typography, 3D cartoon render, plastic toy look
