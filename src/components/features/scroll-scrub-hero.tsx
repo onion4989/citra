@@ -107,14 +107,8 @@ export function ScrollScrubHero() {
         brandRef.current.style.transform = `translateY(${(1 - productLift) * 8}px)`;
       }
 
-      uiRootRef.current?.style.setProperty(
-        "--scrub-progress",
-        String(videoProgress),
-      );
-      uiRootRef.current?.style.setProperty(
-        "--story-progress",
-        String(productProgress),
-      );
+      section.style.setProperty("--scrub-progress", String(videoProgress));
+      section.style.setProperty("--story-progress", String(productProgress));
 
       if (Math.abs(productProgress - storyProgressRef.current) > 0.002) {
         storyProgressRef.current = productProgress;

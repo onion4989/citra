@@ -141,15 +141,19 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
       aria-label="CITRA products"
       data-story-segment={frame.segmentIndex}
     >
-      <ul
-        className="relative flex translate-y-[32%] list-none gap-0 p-0"
-        style={{
-          width: stripWidth,
-          height,
-          overflowX: "clip",
-          overflowY: "visible",
-        }}
+      <div
+        className="flex translate-y-[32%] flex-col items-stretch"
+        style={{ width: stripWidth }}
       >
+        <ul
+          className="relative flex list-none gap-0 p-0"
+          style={{
+            width: stripWidth,
+            height,
+            overflowX: "clip",
+            overflowY: "visible",
+          }}
+        >
         {widths.map((panelW, index) => {
           const isFirst = index === 0;
           const isSecond = index === 1;
@@ -343,7 +347,26 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
             </li>
           );
         })}
-      </ul>
+        </ul>
+
+        <div
+          className="relative mt-5 h-0.5 w-full rounded-full bg-[var(--citrus-foam)]/20"
+          aria-hidden
+        >
+          <div
+            className="absolute inset-y-0 left-0 w-full origin-left rounded-full bg-[var(--citrus-foam)]/75"
+            style={{
+              transform: "scaleX(var(--scrub-progress, 0))",
+            }}
+          />
+          <div
+            className="absolute top-1/2 size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--citrus-foam)] shadow-[0_0_0_2px_rgba(255,255,255,0.25)]"
+            style={{
+              left: "calc(var(--scrub-progress, 0) * 100%)",
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
