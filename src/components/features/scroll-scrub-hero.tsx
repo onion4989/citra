@@ -198,7 +198,7 @@ export function ScrollScrubHero() {
   return (
     <section
       ref={sectionRef}
-      className="relative"
+      className="relative hidden md:block"
       style={{ height: `${heroTotalVh()}vh` }}
       aria-label={`${BRAND_NAME} hero`}
       data-video-vh={HERO_SCROLL.videoVh}

@@ -5,13 +5,42 @@ import { useRef } from "react";
 
 import { useParallaxShift } from "@/lib/parallax-scroll";
 
-const SECTION_TOP_PADDING_PX = 150;
-const SECTION_BOTTOM_PADDING_PX = 150;
-
 const PRODUCT_CAN = {
   src: "/products/Product_1.png",
   width: 200,
   height: 531,
+} as const;
+
+const MOBILE_HALFCUT = {
+  src: "/whats/mobile/mb_Citras_HerfCut.png",
+  width: 212,
+  height: 217,
+} as const;
+
+const MOBILE_CAN = {
+  src: "/products/Product_1.png",
+  width: 90,
+  height: 240,
+} as const;
+
+/** Mobile text plate — already vertical (350×586). Display height slightly shorter. */
+const MOBILE_TEXT_BG = {
+  src: "/whats/mobile/mb_Text_Background.svg",
+  width: 350,
+  height: 586,
+  displayHeight: 560,
+} as const;
+
+const MOBILE_REEF = {
+  src: "/whats/reef.webp",
+  width: 108,
+  height: 107,
+} as const;
+
+const MOBILE_TWO_CITRAS = {
+  src: "/whats/two_citras.webp",
+  width: 105,
+  height: 68,
 } as const;
 
 const TEXT_BG = {
@@ -50,18 +79,105 @@ export function WhatsCitraSection() {
   return (
     <section
       id="whats-citra"
-      className="whats-citra-section relative overflow-x-clip bg-white text-black"
-      style={{
-        paddingTop: SECTION_TOP_PADDING_PX,
-        paddingBottom: SECTION_BOTTOM_PADDING_PX,
-      }}
-      aria-labelledby="whats-citra-title"
+      className="whats-citra-section relative overflow-x-clip bg-white pt-0 pb-[60px] text-black md:pt-0 md:pb-[50px]"
+      aria-label={WHATS_TITLE}
     >
+      {/* Mobile layout */}
+      <div className="mx-auto flex w-full max-w-[390px] flex-col gap-8 px-5 md:hidden">
+        <div
+          className="relative mx-auto"
+          style={{
+            width: MOBILE_HALFCUT.width + 40,
+            height: Math.max(MOBILE_HALFCUT.height, MOBILE_CAN.height),
+          }}
+        >
+          <Image
+            src={MOBILE_HALFCUT.src}
+            alt=""
+            width={MOBILE_HALFCUT.width}
+            height={MOBILE_HALFCUT.height}
+            className="absolute bottom-0 left-0 z-0 object-contain"
+            style={{
+              width: MOBILE_HALFCUT.width,
+              height: MOBILE_HALFCUT.height,
+            }}
+            sizes="212px"
+            aria-hidden
+          />
+          <Image
+            src={MOBILE_CAN.src}
+            alt="CITRA Grove"
+            width={MOBILE_CAN.width}
+            height={MOBILE_CAN.height}
+            className="absolute right-0 bottom-0 z-10 origin-bottom object-contain drop-shadow-[0_14px_22px_rgba(0,0,0,0.22)]"
+            style={{
+              width: MOBILE_CAN.width,
+              height: MOBILE_CAN.height,
+              transform: "rotate(-7deg)",
+            }}
+            sizes="90px"
+          />
+        </div>
+
+        {/* Contents */}
+        <div className="relative mx-auto w-full max-w-[350px]">
+          <h2 className="relative z-20 text-center font-noto-sans-jp text-2xl leading-10 font-bold">
+            {WHATS_TITLE}
+          </h2>
+
+          <div className="relative mt-[60px]">
+            <div className="relative mx-auto w-full max-w-[350px]">
+              <img
+                src={MOBILE_TEXT_BG.src}
+                alt=""
+                width={MOBILE_TEXT_BG.width}
+                height={MOBILE_TEXT_BG.height}
+                className="w-full object-fill"
+                style={{ height: MOBILE_TEXT_BG.displayHeight }}
+                aria-hidden
+              />
+
+              <p className="absolute inset-x-[36px] inset-y-[18%] z-10 overflow-y-auto font-noto-sans-jp text-sm leading-[26px] text-white">
+                {WHATS_BODY}
+              </p>
+            </div>
+
+            <Image
+              src={MOBILE_REEF.src}
+              alt=""
+              width={MOBILE_REEF.width}
+              height={MOBILE_REEF.height}
+              className="pointer-events-none absolute top-[-48px] right-0 z-20 object-contain"
+              style={{
+                width: MOBILE_REEF.width,
+                height: MOBILE_REEF.height,
+              }}
+              sizes="108px"
+              aria-hidden
+            />
+
+            <Image
+              src={MOBILE_TWO_CITRAS.src}
+              alt=""
+              width={MOBILE_TWO_CITRAS.width}
+              height={MOBILE_TWO_CITRAS.height}
+              className="pointer-events-none absolute bottom-0 left-0 z-20 object-contain"
+              style={{
+                width: MOBILE_TWO_CITRAS.width,
+                height: MOBILE_TWO_CITRAS.height,
+              }}
+              sizes="105px"
+              aria-hidden
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop layout */}
       <div
         ref={rootRef}
-        className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-center gap-10 px-6 sm:px-10 md:min-h-[min(560px,68vh)] md:grid-cols-[minmax(200px,0.38fr)_minmax(0,1fr)] md:gap-8 lg:min-h-[min(680px,72vh)] lg:gap-10 xl:min-h-[776px] xl:gap-12 xl:px-8"
+        className="mx-auto hidden w-full max-w-[1440px] grid-cols-1 items-center gap-10 px-6 sm:px-10 md:grid md:min-h-[min(560px,68vh)] md:grid-cols-[minmax(200px,0.38fr)_minmax(0,1fr)] md:gap-8 lg:min-h-[min(680px,72vh)] lg:gap-10 xl:min-h-[776px] xl:gap-12 xl:px-8"
       >
-        {/* Left box: product can */}
         <div className="relative z-10 flex items-center justify-center md:justify-center lg:justify-end lg:pr-4">
           <div
             className="will-change-transform"
@@ -79,16 +195,12 @@ export function WhatsCitraSection() {
           </div>
         </div>
 
-        {/* Right box: contents */}
         <div className="relative z-10 flex min-w-0 items-center justify-center md:justify-start">
           <div
             className="relative w-full max-w-[min(775px,100%)] will-change-transform"
             style={{ transform: `translate3d(0, ${textY}px, 0)` }}
           >
-            <h2
-              id="whats-citra-title"
-              className="relative z-20 pl-[8%] font-noto-sans-jp text-[clamp(1.25rem,2.5vw,2.25rem)] leading-tight font-bold sm:pl-[10%]"
-            >
+            <h2 className="relative z-20 pl-[8%] font-noto-sans-jp text-[clamp(1.25rem,2.5vw,2.25rem)] leading-tight font-bold sm:pl-[10%]">
               {WHATS_TITLE}
             </h2>
 

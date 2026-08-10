@@ -44,29 +44,34 @@ html {
   );
 }
 
-/* Whats Citra — halfcut as section background (left-aligned, responsive) */
+/* Whats Citra — halfcut as section background (desktop only) */
 .whats-citra-section {
-  background-image: url("/whats/herfcut_citras_background.webp");
-  background-repeat: no-repeat;
-  background-position: left 150px;
-  background-size: min(220px, 42vw) auto;
+  background-image: none;
 }
 
 @media (min-width: 768px) {
   .whats-citra-section {
-    background-size: min(280px, 30vw) auto;
+    background-color: #ffffff;
+    background-image:
+      url("/whats/herfcut_citras_background.webp"),
+      linear-gradient(#ffffff, #ffffff);
+    background-repeat: no-repeat, no-repeat;
+    background-position: left center, center;
+    background-size: min(260px, 28vw) auto, auto;
+    background-origin: content-box, border-box;
+    background-clip: content-box, border-box;
   }
 }
 
 @media (min-width: 1024px) {
   .whats-citra-section {
-    background-size: min(320px, 26vw) auto;
+    background-size: min(280px, 24vw) auto, auto;
   }
 }
 
 @media (min-width: 1280px) {
   .whats-citra-section {
-    background-size: 362px auto;
+    background-size: 300px auto, auto;
   }
 }
 
