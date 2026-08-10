@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 import { CITRA_PRODUCTS, PRODUCT_PANEL } from "@/lib/citra-products";
 import { HERO_SCROLL } from "@/lib/hero-scroll";
+import { usePrefersReducedMotion } from "@/lib/prefers-reduced-motion";
 import {
   lerp,
   panelWidthsForExpand,
@@ -50,18 +51,10 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
   } = PRODUCT_PANEL;
 
   const [entered, setEntered] = useState(false);
-  const [reduceMotion, setReduceMotion] = useState(false);
+  const reduceMotion = usePrefersReducedMotion();
   /** Time-based R→L reveal after heroIndex boundary swap (segment ≥ 1). */
   const [heroSwapIn, setHeroSwapIn] = useState(true);
   const [trackedHeroIndex, setTrackedHeroIndex] = useState(0);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setReduceMotion(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
 
   useEffect(() => {
     if (reduceMotion) {

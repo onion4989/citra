@@ -1,22 +1,6 @@
-import Image from "next/image";
-
-import { CITRA_PRODUCTS } from "@/lib/citra-products";
+import { IntroductionParallax } from "@/components/features/introduction-parallax";
 
 const SECTION_TOP_PADDING_PX = 150;
-const PRODUCT_GAP_PX = 45;
-const WAVE_HEIGHT_PX = 458;
-
-const PRODUCT_DISPLAY = [
-  { width: 114, height: 304 },
-  { width: 138, height: 366 },
-  { width: 209, height: 556 },
-  { width: 138, height: 366 },
-  { width: 114, height: 304 },
-] as const;
-
-const PRODUCT_SLOT_HEIGHT_PX = Math.max(
-  ...PRODUCT_DISPLAY.map((size) => size.height),
-);
 
 const STAR_PATH =
   "M24 0L29.3883 16.5836H46.8254L32.7185 26.8328L38.1068 43.4164L24 33.1672L9.89315 43.4164L15.2815 26.8328L1.17464 16.5836H18.6117L24 0Z";
@@ -105,52 +89,7 @@ export function IntroductionSection() {
         </header>
       </div>
 
-      <div className="relative mt-16 w-full pb-16 sm:mt-20 sm:pb-24">
-        <div
-          className="pointer-events-none absolute top-[60%] left-1/2 z-0 w-screen -translate-x-1/2 -translate-y-1/2"
-          aria-hidden
-        >
-          <Image
-            src="/introduction/background_wave.webp"
-            alt=""
-            width={1440}
-            height={WAVE_HEIGHT_PX}
-            className="h-auto w-full object-cover"
-            sizes="100vw"
-          />
-        </div>
-
-        <ul
-          className="relative z-10 flex w-full list-none items-stretch justify-center p-0"
-          style={{ gap: PRODUCT_GAP_PX }}
-          aria-label="CITRA product lineup"
-        >
-          {CITRA_PRODUCTS.map((product, index) => {
-            const size = PRODUCT_DISPLAY[index]!;
-
-            return (
-              <li
-                key={product.id}
-                className="flex shrink-0 items-center justify-center"
-                style={{ height: PRODUCT_SLOT_HEIGHT_PX }}
-              >
-                <Image
-                  src={product.imageSrc}
-                  alt={product.name}
-                  width={size.width}
-                  height={size.height}
-                  className="object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.18)]"
-                  style={{
-                    width: size.width,
-                    height: size.height,
-                  }}
-                  sizes={`${size.width}px`}
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <IntroductionParallax />
     </section>
   );
 }

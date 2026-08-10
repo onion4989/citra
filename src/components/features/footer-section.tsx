@@ -24,6 +24,73 @@ const LEGAL_ITEMS = [
   "プライバシーポリシー",
 ] as const;
 
+const FOOTER_BG_SRC = "/footer/footer_background.webp";
+
+/**
+ * REMOVABLE experiment: SVG water displacement on the footer background.
+ * To revert: delete FooterWaterBackground usage + restore CSS background-image.
+ *
+ * Keep the photo’s natural wavy waterline; shimmer warps that silhouette
+ * (no top blur / white wash that would flatten it into a straight edge).
+ */
+function FooterWaterBackground() {
+  return (
+    <div
+      className="footer-water-stack pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      aria-hidden
+    >
+      <svg className="absolute h-0 w-0" aria-hidden>
+        <defs>
+          <filter
+            id="footer-water-displace"
+            x="-20%"
+            y="-20%"
+            width="140%"
+            height="140%"
+            colorInterpolationFilters="sRGB"
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.012 0.018"
+              numOctaves="3"
+              seed="4"
+              result="noise"
+            >
+              <animate
+                attributeName="baseFrequency"
+                dur="10s"
+                values="0.01 0.015;0.018 0.026;0.013 0.02;0.01 0.015"
+                repeatCount="indefinite"
+              />
+            </feTurbulence>
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="24"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      {/* Sharp base — top waterline stays unfiltered */}
+      <img
+        src={FOOTER_BG_SRC}
+        alt=""
+        className="footer-water-underlay absolute inset-0 h-full w-full object-cover object-top"
+      />
+
+      {/* Shimmer from ~100px down, with a soft gradient lead-in */}
+      <img
+        src={FOOTER_BG_SRC}
+        alt=""
+        className="footer-water-media absolute inset-0 h-full w-full origin-center scale-[1.08] object-cover object-top"
+      />
+    </div>
+  );
+}
+
 function FooterNavColumn({
   title,
   items,
@@ -49,9 +116,11 @@ export function FooterSection() {
   return (
     <footer
       id="footer"
-      className="footer-section relative flex min-h-[min(672px,85vh)] flex-col overflow-x-clip text-black md:min-h-[672px]"
+      className="footer-section relative flex min-h-[min(672px,85vh)] flex-col overflow-hidden text-black md:min-h-[672px]"
       aria-label="サイトフッター"
     >
+      <FooterWaterBackground />
+
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-1 flex-col px-6 pb-8 sm:px-8 lg:px-10 xl:px-16 xl:pb-10">
         <div className="mt-auto flex flex-col gap-8 md:gap-10 xl:gap-12">
           <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-6 lg:gap-8 xl:gap-16">

@@ -70,18 +70,40 @@ html {
   }
 }
 
-/* Footer — liquid citrus background, full-bleed responsive */
+/* Footer — liquid citrus background (image layer lives in FooterWaterBackground) */
 .footer-section {
   background-color: #ffffff;
-  background-image: url("/footer/footer_background.webp");
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: cover;
 }
 
-@media (min-width: 768px) {
-  .footer-section {
-    background-position: center top;
-    background-size: cover;
+/* REMOVABLE with FooterWaterBackground */
+.footer-water-underlay {
+  /* Full-strength base so the natural wavy top stays sharp */
+  opacity: 1;
+}
+
+.footer-water-media {
+  filter: url("#footer-water-displace");
+  opacity: 1;
+  /* No effect on the top ~100px; soft fade into shimmer below */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 80px,
+    #000 130px,
+    #000 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 80px,
+    #000 130px,
+    #000 100%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-water-media {
+    filter: none;
+    opacity: 0;
   }
 }

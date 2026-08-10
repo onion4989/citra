@@ -9,6 +9,7 @@ import {
   productStoryProgressFromY,
   videoProgressFromY,
 } from "@/lib/hero-scroll";
+import { usePrefersReducedMotion } from "@/lib/prefers-reduced-motion";
 
 /** Scrub-optimized all-intra encode (see public/videos). */
 const CITRUS_VIDEO_SRC = "/videos/Fruit_Citrus_Splash_scrub.mp4";
@@ -72,16 +73,8 @@ export function ScrollScrubHero() {
   const durationRef = useRef(0);
   const storyProgressRef = useRef(0);
 
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [storyProgress, setStoryProgress] = useState(0);
-
-  useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setPrefersReducedMotion(media.matches);
-    sync();
-    media.addEventListener("change", sync);
-    return () => media.removeEventListener("change", sync);
-  }, []);
 
   // Scroll → video seek + product story progress (independent mappings).
   useEffect(() => {
