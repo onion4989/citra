@@ -22,7 +22,7 @@ const PRODUCT_SLOT_HEIGHT_PX = Math.max(
 );
 
 /** Mobile can size — fits 3-across on ~390px. */
-const MOBILE_CAN = { width: 100, height: 266 } as const;
+const MOBILE_CAN = { width: 88, height: 234 } as const;
 
 /** Clearly readable while the block is on screen. */
 const WAVE_PARALLAX_PX = 100;

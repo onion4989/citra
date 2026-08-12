@@ -51,7 +51,7 @@ export function MobileHero() {
           aria-label="シトラス × スパークリング"
         >
           <div className="flex flex-col items-center">
-            <span className="font-noto-sans-jp text-[24px] leading-none font-bold">
+            <span className="font-noto-sans-jp text-[20px] leading-none font-bold whitespace-nowrap">
               シトラス
             </span>
             <span className="mt-1 font-sans text-[14px] tracking-[0.3em]">
@@ -59,13 +59,13 @@ export function MobileHero() {
             </span>
           </div>
           <span
-            className="flex h-[24px] items-center font-noto-sans-jp text-[20px] leading-none font-bold"
+            className="flex h-[20px] items-center font-noto-sans-jp text-[16px] leading-none font-bold"
             aria-hidden
           >
             ×
           </span>
           <div className="flex flex-col items-center">
-            <span className="font-noto-sans-jp text-[24px] leading-none font-bold">
+            <span className="font-noto-sans-jp text-[20px] leading-none font-bold whitespace-nowrap">
               スパークリング
             </span>
             <span className="mt-1 font-sans text-[14px] tracking-[0.3em]">
