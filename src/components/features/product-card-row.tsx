@@ -18,9 +18,63 @@ const ENTER_STAGGER_MS = 100;
 const ENTER_OFFSET_PX = 32;
 const COLLAPSING_SLOT_START = 2;
 
+const NEW_RELEASE_BADGE = {
+  src: "/videos/Hero_NewRelease_white.svg",
+  width: 320,
+  height: 191,
+} as const;
+
 type ProductCardRowProps = {
   storyProgress?: number;
 };
+
+function HeroCitrusHeadline() {
+  return (
+    <div
+      className="relative -mt-20 mb-24 flex justify-center self-center text-[var(--citrus-foam)]"
+      aria-label="シトラス × スパークリング"
+    >
+      <div className="relative inline-flex items-start gap-x-3">
+        <div className="relative flex flex-col items-center">
+          <img
+            src={NEW_RELEASE_BADGE.src}
+            alt=""
+            width={NEW_RELEASE_BADGE.width}
+            height={NEW_RELEASE_BADGE.height}
+            className="pointer-events-none absolute -top-30 -left-32 max-h-none max-w-none origin-bottom-left rotate-[-2deg]"
+            style={{
+              width: NEW_RELEASE_BADGE.width,
+              height: NEW_RELEASE_BADGE.height,
+            }}
+            aria-hidden
+          />
+          <span className="font-noto-sans-jp text-[48px] leading-none font-bold">
+            シトラス
+          </span>
+          <span className="mt-1.5 font-sans text-xs tracking-[0.2em] uppercase opacity-90">
+            CITRAS
+          </span>
+        </div>
+
+        <span
+          className="flex h-[48px] items-center font-noto-sans-jp text-[36px] leading-none font-bold"
+          aria-hidden
+        >
+          ×
+        </span>
+
+        <div className="flex flex-col items-center">
+          <span className="font-noto-sans-jp text-[48px] leading-none font-bold">
+            スパークリング
+          </span>
+          <span className="mt-1.5 font-sans text-xs tracking-[0.2em] uppercase opacity-90">
+            SPARKLING
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function activeDropShadowFor(expandT: number) {
   if (expandT < 0.01) return "none";
@@ -138,6 +192,7 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
         className="flex translate-y-[32%] flex-col items-stretch"
         style={{ width: stripWidth }}
       >
+        <HeroCitrusHeadline />
         <ul
           className="relative flex list-none gap-0 p-0"
           style={{
