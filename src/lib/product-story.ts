@@ -11,6 +11,13 @@ export const PRODUCT_STORY = {
   /** Left hero: R→L entrance after segment boundary swap. */
   heroSwapSlidePx: 48,
   heroSwapDurationMs: 480,
+  /** Right preview: shorter R→L than the hero can. */
+  previewSwapSlidePx: 28,
+  /**
+   * Accordion expandT at which the right can first plays its entrance.
+   * After copy has started to appear, before expand fully locks.
+   */
+  previewRevealExpandT: 0.38,
   /**
    * Within segment 0 local progress: expand finishes at this point,
    * remainder holds expandT=1 so Grove stays readable longer.

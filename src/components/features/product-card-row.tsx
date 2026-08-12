@@ -90,7 +90,7 @@ function activeDropShadowFor(expandT: number) {
 
 /**
  * Accordion expand (0–20%), then instant swaps at boundaries.
- * Left hero alone: time-based R→L fade-in (opacity 0→1) on each swap.
+ * Left hero and right preview: time-based R→L fade-in on first reveal and each swap.
  */
 export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
   const {
@@ -109,6 +109,10 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
   /** Time-based R→L reveal after heroIndex boundary swap (segment ≥ 1). */
   const [heroSwapIn, setHeroSwapIn] = useState(true);
   const [trackedHeroIndex, setTrackedHeroIndex] = useState(0);
+  /** Right preview: same R→L fade-in on first expand reveal and each swap. */
+  const [previewSwapIn, setPreviewSwapIn] = useState(true);
+  const [trackedPreviewIndex, setTrackedPreviewIndex] = useState(1);
+  const [previewExpandRevealed, setPreviewExpandRevealed] = useState(false);
 
   useEffect(() => {
     if (reduceMotion) {
@@ -138,6 +142,27 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
     }
   }
 
+  const accordionOpen = expandT > 0.001;
+
+  if (previewIndex !== trackedPreviewIndex) {
+    setTrackedPreviewIndex(previewIndex);
+    if (!reduceMotion && previewExpandRevealed) {
+      setPreviewSwapIn(false);
+    }
+  }
+
+  if (!accordionOpen && previewExpandRevealed) {
+    setPreviewExpandRevealed(false);
+    setPreviewSwapIn(true);
+  } else if (!reduceMotion && accordionOpen && !previewExpandRevealed) {
+    if (expandT >= PRODUCT_STORY.previewRevealExpandT) {
+      setPreviewExpandRevealed(true);
+      setPreviewSwapIn(false);
+    } else if (previewSwapIn) {
+      setPreviewSwapIn(false);
+    }
+  }
+
   // Time-based swap-in after the out frame paints.
   useEffect(() => {
     if (reduceMotion || segmentIndex === 0 || heroSwapIn) return;
@@ -151,6 +176,20 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
       window.cancelAnimationFrame(innerId);
     };
   }, [heroIndex, heroSwapIn, segmentIndex, reduceMotion]);
+
+  useEffect(() => {
+    if (reduceMotion || previewSwapIn) return;
+    if (!previewExpandRevealed) return;
+
+    let innerId = 0;
+    const outerId = window.requestAnimationFrame(() => {
+      innerId = window.requestAnimationFrame(() => setPreviewSwapIn(true));
+    });
+    return () => {
+      window.cancelAnimationFrame(outerId);
+      window.cancelAnimationFrame(innerId);
+    };
+  }, [previewIndex, previewExpandRevealed, previewSwapIn, reduceMotion]);
 
   const widths = panelWidthsForExpand(
     expandT,
@@ -181,6 +220,15 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
     segmentIndex >= 1
       ? PRODUCT_STORY.heroSwapDurationMs
       : ENTER_DURATION_MS;
+  const previewSlideX =
+    accordionOpen && !previewSwapIn
+      ? PRODUCT_STORY.previewSwapSlidePx
+      : 0;
+  const previewCanVisible =
+    entered &&
+    (!accordionOpen || (previewExpandRevealed && previewSwapIn));
+  const previewTransitionNone =
+    reduceMotion || !previewExpandRevealed;
 
   return (
     <div
@@ -189,7 +237,7 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
       data-story-segment={frame.segmentIndex}
     >
       <div
-        className="flex translate-y-[32%] flex-col items-stretch"
+        className="flex translate-y-[24%] flex-col items-stretch"
         style={{ width: stripWidth }}
       >
         <HeroCitrusHeadline />
@@ -286,10 +334,6 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
           }
 
           if (isSecond) {
-            const previewOpacity = !entered
-              ? 0
-              : Math.min(1, panelW > 1 ? 1 : panelW / 36);
-
             return (
               <li
                 key={`slot-${index}`}
@@ -310,6 +354,7 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
               >
                 <div className="flex h-full w-full items-center justify-center">
                   <Image
+                    key={previewProduct.id}
                     src={previewProduct.imageSrc}
                     alt={previewProduct.name}
                     width={imageWidth}
@@ -318,17 +363,14 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
                     priority
                     className="h-[304px] w-[114px] object-contain will-change-transform"
                     style={{
-                      opacity: previewOpacity,
-                      visibility: previewOpacity < 0.02 ? "hidden" : "visible",
-                      transform: entered
-                        ? "translateY(0)"
-                        : `translateY(${ENTER_OFFSET_PX}px)`,
-                      transitionProperty: reduceMotion
+                      opacity: previewCanVisible ? 1 : 0,
+                      transform: `translateY(${enterY}px) translateX(${previewSlideX}px)`,
+                      transitionProperty: previewTransitionNone
                         ? "none"
                         : "opacity, transform",
-                      transitionDuration: reduceMotion
+                      transitionDuration: previewTransitionNone
                         ? "0ms"
-                        : `${ENTER_DURATION_MS}ms`,
+                        : `${PRODUCT_STORY.heroSwapDurationMs}ms`,
                       transitionTimingFunction:
                         "cubic-bezier(0.22, 1, 0.36, 1)",
                       transitionDelay:
