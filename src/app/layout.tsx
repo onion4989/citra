@@ -17,6 +17,8 @@ const notoSansJp = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],
   weight: ["400", "700"],
+  // Avoid build-time font preload issues in Docker (esp. CJK).
+  preload: false,
 });
 
 export const metadata: Metadata = {
