@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type SyntheticEvent,
+} from "react";
 
 import { ProductCardRow } from "@/components/features/product-card-row";
 import {
@@ -14,6 +20,7 @@ import { usePrefersReducedMotion } from "@/lib/prefers-reduced-motion";
 /** Scrub-optimized all-intra encode (see public/videos). */
 const CITRUS_VIDEO_SRC = "/videos/Fruit_Citrus_Splash_scrub.mp4";
 const BRAND_NAME = "CITRA";
+const REDUCED_MOTION_SCRUB = 0.55;
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -57,6 +64,26 @@ function applyTightenEffects(
   refs.overlayRoot?.style.setProperty("--tighten", String(tighten));
 }
 
+type TightenOverlayRefs = {
+  mesh: HTMLDivElement | null;
+  vignette: HTMLDivElement | null;
+  bars: HTMLDivElement | null;
+  overlayRoot: HTMLDivElement | null;
+};
+
+function initReducedMotionHero(
+  video: HTMLVideoElement,
+  overlayRefs: TightenOverlayRefs,
+) {
+  applyTightenEffects(REDUCED_MOTION_SCRUB, {
+    video,
+    ...overlayRefs,
+  });
+  void video.play().catch(() => {
+    // Autoplay may be blocked; still show first frame.
+  });
+}
+
 export function ScrollScrubHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -75,6 +102,43 @@ export function ScrollScrubHero() {
 
   const prefersReducedMotion = usePrefersReducedMotion();
   const [storyProgress, setStoryProgress] = useState(0);
+
+  const overlayRefs = useCallback(
+    (): TightenOverlayRefs => ({
+      mesh: meshRef.current,
+      vignette: vignetteRef.current,
+      bars: barsRef.current,
+      overlayRoot: overlayRootRef.current,
+    }),
+    [],
+  );
+
+  const setupReducedMotionHero = useCallback(
+    (video: HTMLVideoElement) => {
+      initReducedMotionHero(video, overlayRefs());
+    },
+    [overlayRefs],
+  );
+
+  const handleVideoRef = useCallback(
+    (node: HTMLVideoElement | null) => {
+      videoRef.current = node;
+      if (node && prefersReducedMotion && node.readyState >= 1) {
+        setupReducedMotionHero(node);
+      }
+    },
+    [prefersReducedMotion, setupReducedMotionHero],
+  );
+
+  const handleVideoLoadedMetadata = useCallback(
+    (event: SyntheticEvent<HTMLVideoElement>) => {
+      if (!prefersReducedMotion) {
+        return;
+      }
+      setupReducedMotionHero(event.currentTarget);
+    },
+    [prefersReducedMotion, setupReducedMotionHero],
+  );
 
   // Scroll → video seek + product story progress (independent mappings).
   useEffect(() => {
@@ -178,23 +242,6 @@ export function ScrollScrubHero() {
     };
   }, [prefersReducedMotion]);
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !prefersReducedMotion) return;
-
-    applyTightenEffects(0.55, {
-      video,
-      mesh: meshRef.current,
-      vignette: vignetteRef.current,
-      bars: barsRef.current,
-      overlayRoot: overlayRootRef.current,
-    });
-
-    void video.play().catch(() => {
-      // Autoplay may be blocked; still show first frame.
-    });
-  }, [prefersReducedMotion]);
-
   return (
     <section
       ref={sectionRef}
@@ -209,13 +256,15 @@ export function ScrollScrubHero() {
       {/* overflow visible so active can may zoom past the panel */}
       <div className="sticky top-0 h-dvh w-full overflow-x-clip overflow-y-visible bg-[var(--citrus-ink)]">
         <video
-          ref={videoRef}
+          ref={handleVideoRef}
           className="absolute inset-0 h-full w-full object-cover"
           src={CITRUS_VIDEO_SRC}
           muted
           playsInline
           preload="auto"
+          autoPlay={prefersReducedMotion}
           loop={prefersReducedMotion}
+          onLoadedMetadata={handleVideoLoadedMetadata}
           aria-hidden
         />
 
@@ -242,7 +291,7 @@ export function ScrollScrubHero() {
 
         <div
           ref={uiRootRef}
-          className="relative z-30 flex h-full flex-col px-6 py-8 sm:px-10 sm:py-10 lg:px-16"
+          className="relative z-30 flex h-full flex-col px-6 py-8 pointer-events-none sm:px-10 sm:py-10 lg:px-16"
         >
           <header className="flex items-baseline justify-between gap-4">
             <p

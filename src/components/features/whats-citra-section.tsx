@@ -23,27 +23,19 @@ const MOBILE_CAN = {
   height: 240,
 } as const;
 
-/** Mobile text plate — vertical SVG; height follows body copy. */
-const MOBILE_TEXT_BG = {
-  src: "/whats/mobile/mb_Text_Background.svg",
-  width: 350,
-  height: 586,
-} as const;
+/** Mobile text plate — rounded rect; height follows body copy. */
+const MOBILE_TEXT_PLATE_COLOR = "#18626B";
+const MOBILE_TEXT_PLATE_RADIUS_PX = 20;
 
 /** Fixed insets so padding stays constant across viewport widths. */
 const MOBILE_TEXT_INSET_X_PX = 36;
 const MOBILE_TEXT_INSET_TOP_PX = 80;
 /** Extra bottom clearance so copy clears Two Citras. */
 const MOBILE_TEXT_INSET_BOTTOM_PX = 56;
-/**
- * Soft floor for plate height vs width (intrinsic SVG is ~1.67).
- * Keeps the blob from squashing so far that side padding clips.
- */
-const MOBILE_TEXT_MIN_HEIGHT_RATIO = 1.45;
 
 /** Figma 142:292 — fixed offsets from plate corners (586px reference). */
 const MOBILE_REEF_TOP_PX = -48;
-const MOBILE_TWO_CITRAS_BOTTOM_PX = -6;
+const MOBILE_TWO_CITRAS_BOTTOM_PX = -26;
 
 const MOBILE_REEF = {
   src: "/whats/reef.webp",
@@ -140,66 +132,56 @@ export function WhatsCitraSection() {
           </h2>
 
           <div className="relative mt-[60px]">
-            <div
-              className="relative mx-auto w-full max-w-[350px]"
-              style={{ containerType: "inline-size" }}
-            >
+            <div className="relative mx-auto w-full max-w-[350px]">
               <div
-                className="relative"
+                className="pointer-events-none absolute inset-0"
                 style={{
-                  minHeight: `calc(100cqw * ${MOBILE_TEXT_MIN_HEIGHT_RATIO})`,
+                  backgroundColor: MOBILE_TEXT_PLATE_COLOR,
+                  borderRadius: MOBILE_TEXT_PLATE_RADIUS_PX,
+                }}
+                aria-hidden
+              />
+
+              <p
+                className="relative z-10 font-noto-sans-jp text-[13px] leading-[24px] text-white"
+                style={{
+                  paddingInline: MOBILE_TEXT_INSET_X_PX,
+                  paddingTop: MOBILE_TEXT_INSET_TOP_PX,
+                  paddingBottom: MOBILE_TEXT_INSET_BOTTOM_PX,
                 }}
               >
-                <img
-                  src={MOBILE_TEXT_BG.src}
-                  alt=""
-                  width={MOBILE_TEXT_BG.width}
-                  height={MOBILE_TEXT_BG.height}
-                  className="pointer-events-none absolute inset-0 h-full w-full object-fill"
-                  aria-hidden
-                />
+                {WHATS_BODY}
+              </p>
 
-                <p
-                  className="relative z-10 font-noto-sans-jp text-[13px] leading-[24px] text-white"
-                  style={{
-                    paddingInline: MOBILE_TEXT_INSET_X_PX,
-                    paddingTop: MOBILE_TEXT_INSET_TOP_PX,
-                    paddingBottom: MOBILE_TEXT_INSET_BOTTOM_PX,
-                  }}
-                >
-                  {WHATS_BODY}
-                </p>
+              <Image
+                src={MOBILE_REEF.src}
+                alt=""
+                width={MOBILE_REEF.width}
+                height={MOBILE_REEF.height}
+                className="pointer-events-none absolute right-0 z-20 object-contain"
+                style={{
+                  top: MOBILE_REEF_TOP_PX,
+                  width: MOBILE_REEF.width,
+                  height: MOBILE_REEF.height,
+                }}
+                sizes="108px"
+                aria-hidden
+              />
 
-                <Image
-                  src={MOBILE_REEF.src}
-                  alt=""
-                  width={MOBILE_REEF.width}
-                  height={MOBILE_REEF.height}
-                  className="pointer-events-none absolute right-0 z-20 object-contain"
-                  style={{
-                    top: MOBILE_REEF_TOP_PX,
-                    width: MOBILE_REEF.width,
-                    height: MOBILE_REEF.height,
-                  }}
-                  sizes="108px"
-                  aria-hidden
-                />
-
-                <Image
-                  src={MOBILE_TWO_CITRAS.src}
-                  alt=""
-                  width={MOBILE_TWO_CITRAS.width}
-                  height={MOBILE_TWO_CITRAS.height}
-                  className="pointer-events-none absolute left-0 z-20 object-contain"
-                  style={{
-                    bottom: MOBILE_TWO_CITRAS_BOTTOM_PX,
-                    width: MOBILE_TWO_CITRAS.width,
-                    height: MOBILE_TWO_CITRAS.height,
-                  }}
-                  sizes="105px"
-                  aria-hidden
-                />
-              </div>
+              <Image
+                src={MOBILE_TWO_CITRAS.src}
+                alt=""
+                width={MOBILE_TWO_CITRAS.width}
+                height={MOBILE_TWO_CITRAS.height}
+                className="pointer-events-none absolute left-0 z-20 object-contain"
+                style={{
+                  bottom: MOBILE_TWO_CITRAS_BOTTOM_PX,
+                  width: MOBILE_TWO_CITRAS.width,
+                  height: MOBILE_TWO_CITRAS.height,
+                }}
+                sizes="105px"
+                aria-hidden
+              />
             </div>
           </div>
         </div>
