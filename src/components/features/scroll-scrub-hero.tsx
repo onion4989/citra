@@ -18,7 +18,7 @@ import {
 import { usePrefersReducedMotion } from "@/lib/prefers-reduced-motion";
 
 /** Scrub-optimized all-intra encode (see public/videos). */
-const CITRUS_VIDEO_SRC = "/videos/Fruit_Citrus_Splash_scrub.mp4";
+const CITRUS_VIDEO_SRC = "/videos/vid_top_citrus-splash_scrub.mp4";
 const BRAND_NAME = "CITRA";
 const REDUCED_MOTION_SCRUB = 0.55;
 

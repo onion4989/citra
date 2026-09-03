@@ -7,7 +7,7 @@ const CAN_WIDTH = 114;
 const CAN_HEIGHT = 304;
 
 const NEW_RELEASE_BADGE = {
-  src: "/videos/Hero_NewRelease_black.svg",
+  src: "/assets/pages/top/hero/ill_top_new-release_black.svg",
   /** ~140px wide keeps lettering readable under CITRA. */
   width: 140,
   height: 83,
@@ -77,7 +77,7 @@ export function MobileHero() {
 
       <div className="relative z-10 mt-6 flex flex-1 items-start justify-center">
         <Image
-          src="/products/Product_1.png"
+          src="/assets/pages/top/products/img_top_product_01.png"
           alt="CITRA Grove"
           width={CAN_WIDTH}
           height={CAN_HEIGHT}

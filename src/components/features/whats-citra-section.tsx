@@ -6,19 +6,19 @@ import { useRef } from "react";
 import { useParallaxShift } from "@/lib/parallax-scroll";
 
 const PRODUCT_CAN = {
-  src: "/products/Product_1.png",
+  src: "/assets/pages/top/products/img_top_product_01.png",
   width: 200,
   height: 531,
 } as const;
 
 const MOBILE_HALFCUT = {
-  src: "/whats/mobile/mb_Citras_HerfCut.png",
+  src: "/assets/pages/top/whats/img_top_halfcut-mobile.png",
   width: 212,
   height: 217,
 } as const;
 
 const MOBILE_CAN = {
-  src: "/products/Product_1.png",
+  src: "/assets/pages/top/products/img_top_product_01.png",
   width: 90,
   height: 240,
 } as const;
@@ -38,31 +38,31 @@ const MOBILE_REEF_TOP_PX = -48;
 const MOBILE_TWO_CITRAS_BOTTOM_PX = -26;
 
 const MOBILE_REEF = {
-  src: "/whats/reef.webp",
+  src: "/assets/pages/top/whats/img_top_reef.webp",
   width: 108,
   height: 107,
 } as const;
 
 const MOBILE_TWO_CITRAS = {
-  src: "/whats/two_citras.webp",
+  src: "/assets/pages/top/whats/img_top_two-citras.webp",
   width: 105,
   height: 68,
 } as const;
 
 const TEXT_BG = {
-  src: "/whats/text_background.svg",
+  src: "/assets/pages/top/whats/deco_top_text-plate.svg",
   width: 775,
   height: 384,
 } as const;
 
 const REEF = {
-  src: "/whats/reef.webp",
+  src: "/assets/pages/top/whats/img_top_reef.webp",
   width: 103,
   height: 102,
 } as const;
 
 const TWO_CITRAS = {
-  src: "/whats/two_citras.webp",
+  src: "/assets/pages/top/whats/img_top_two-citras.webp",
   width: 167,
   height: 108,
 } as const;

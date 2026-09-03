@@ -27,7 +27,7 @@ const LEGAL_PRIVACY = "プライバシーポリシー";
 
 const COPYRIGHT_TEXT = "COPYRIGHT © CITRA. ALL RIGHTS RESERVED.";
 
-const FOOTER_BG_SRC = "/footer/footer_background.webp";
+const FOOTER_BG_SRC = "/assets/pages/top/footer/bg_top_footer.webp";
 
 /**
  * REMOVABLE experiment: SVG water displacement on the footer background.

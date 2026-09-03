@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRef, type CSSProperties } from "react";
 
 import { HeroScrollCue } from "@/components/features/hero-scroll-cue";
+import { HeroScrollIndicator } from "@/components/features/hero-scroll-indicator";
 import { CITRA_PRODUCTS, PRODUCT_PANEL } from "@/lib/citra-products";
 import { HERO_SCROLL } from "@/lib/hero-scroll";
 import { usePrefersReducedMotion } from "@/lib/prefers-reduced-motion";
@@ -17,7 +18,7 @@ import {
 const COLLAPSING_SLOT_START = 2;
 
 const NEW_RELEASE_BADGE = {
-  src: "/videos/Hero_NewRelease_white.svg",
+  src: "/assets/pages/top/hero/ill_top_new-release_white.svg",
   width: 320,
   height: 191,
 } as const;
@@ -165,15 +166,16 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
           style={{ width: stripWidth }}
         >
           <HeroCitrusHeadline />
-          <ul
-            className="relative flex list-none gap-0 p-0"
-            style={{
-              width: stripWidth,
-              height,
-              overflowX: "clip",
-              overflowY: "visible",
-            }}
-          >
+          <div className="relative">
+            <ul
+              className="relative flex list-none gap-0 p-0"
+              style={{
+                width: stripWidth,
+                height,
+                overflowX: "clip",
+                overflowY: "visible",
+              }}
+            >
             {widths.map((panelW, index) => {
               const isFirst = index === 0;
               const isSecond = index === 1;
@@ -343,7 +345,9 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
                 </li>
               );
             })}
-          </ul>
+            </ul>
+            <HeroScrollIndicator className="absolute top-1/2 left-full ml-6 -translate-y-1/2" />
+          </div>
 
           <div
             className="relative mt-5 h-0.5 w-full rounded-full bg-[var(--citrus-foam)]/20"

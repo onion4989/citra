@@ -5,7 +5,7 @@ export const CITRA_PRODUCTS = [
     flavor: "グリーンシトラス",
     blurb:
       "青みのある柑橘をイメージした、すっきりした炭酸飲料です。甘さは控えめで後味が軽く、食事中や休憩のひとときにお勧め。冷たくして飲むのがおすすめです。",
-    imageSrc: "/products/Product_1.png",
+    imageSrc: "/assets/pages/top/products/img_top_product_01.png",
     panelColor: "#94C145",
   },
   {
@@ -14,7 +14,7 @@ export const CITRA_PRODUCTS = [
     flavor: "ハーフカットシトラス",
     blurb:
       "スッキリとして甘さで、果汁感のある味わいが特長です。冷やして飲むと爽快感が増し、のどごしのよいスパークリングとして楽しめます。リフレッシュしたい時におすすめです。",
-    imageSrc: "/products/Product_2.png",
+    imageSrc: "/assets/pages/top/products/img_top_product_02.png",
     panelColor: "#6A9841",
   },
   {
@@ -23,7 +23,7 @@ export const CITRA_PRODUCTS = [
     flavor: "ミスティグリーン",
     blurb:
       "濃い目の柑橘フレーバーで、炭酸は軽めです。香りの強さと酸味が効いているので、暑い日に飲むドリンクとしておすすめです。",
-    imageSrc: "/products/Product_3.png",
+    imageSrc: "/assets/pages/top/products/img_top_product_03.png",
     panelColor: "#2A9A30",
   },
   {
@@ -32,7 +32,7 @@ export const CITRA_PRODUCTS = [
     flavor: "デュアルシトラス",
     blurb:
       "まるごとの柑橘の香りと、カットした果肉の風味をまとめたブレンドです。コクと爽快感のバランスがよく、一本で違いを感じたいときにおすすめです。",
-    imageSrc: "/products/Product_4.png",
+    imageSrc: "/assets/pages/top/products/img_top_product_04.png",
     panelColor: "#2A9A75",
   },
   {
@@ -41,7 +41,7 @@ export const CITRA_PRODUCTS = [
     flavor: "ピール＆パルプ",
     blurb:
       "皮寄りの香りと、果肉のやさしい甘みを重ねたシトラスです。飲み終わりまで味が続きやすく、食後や気分転換にも合わせやすい一本です。",
-    imageSrc: "/products/Product_5.png",
+    imageSrc: "/assets/pages/top/products/img_top_product_05.png",
     panelColor: "#3096A3",
   },
 ] as const;

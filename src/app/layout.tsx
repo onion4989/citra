@@ -26,9 +26,15 @@ export const metadata: Metadata = {
   description:
     "Hero scroll-scrub with citrus generative video and a fictional sparkling drink.",
   icons: {
-    icon: [{ url: "/favicon/icon-32.png", sizes: "32x32", type: "image/png" }],
+    icon: [
+      { url: "/assets/common/fav_c_32.png", sizes: "32x32", type: "image/png" },
+    ],
     apple: [
-      { url: "/favicon/apple-icon.png", sizes: "180x180", type: "image/png" },
+      {
+        url: "/assets/common/fav_c_apple.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
     ],
   },
 };

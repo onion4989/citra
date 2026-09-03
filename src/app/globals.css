@@ -110,7 +110,7 @@ html {
   .whats-citra-section {
     background-color: #ffffff;
     background-image:
-      url("/whats/herfcut_citras_background.webp"),
+      url("/assets/pages/top/whats/bg_top_halfcut.webp"),
       linear-gradient(#ffffff, #ffffff);
     background-repeat: no-repeat, no-repeat;
     background-position: left center, center;

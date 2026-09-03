@@ -77,7 +77,7 @@ export function IntroductionParallax() {
           style={{ transform: `translate3d(0, ${waveYMobile}px, 0)` }}
         >
           <Image
-            src="/introduction/background_wave.webp"
+            src="/assets/pages/top/introduction/bg_top_wave.webp"
             alt=""
             width={1440}
             height={WAVE_HEIGHT_PX}
@@ -97,7 +97,7 @@ export function IntroductionParallax() {
           style={{ transform: `translate3d(0, ${waveYDesktop}px, 0)` }}
         >
           <Image
-            src="/introduction/background_wave.webp"
+            src="/assets/pages/top/introduction/bg_top_wave.webp"
             alt=""
             width={1440}
             height={WAVE_HEIGHT_PX}
