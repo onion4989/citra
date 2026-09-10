@@ -4,7 +4,7 @@
 
 
 ## Demo
-https://sitra.see-u-soon.design/
+https://citra.see-u-soon.design/
 
 
 ## Role
