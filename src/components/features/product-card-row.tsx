@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, type CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 
 import { HeroScrollCue } from "@/components/features/hero-scroll-cue";
 import { HeroScrollIndicator } from "@/components/features/hero-scroll-indicator";
@@ -108,7 +108,7 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
   } = PRODUCT_PANEL;
 
   const reduceMotion = usePrefersReducedMotion();
-  const previewRevealedRef = useRef(false);
+  const [previewRevealed, setPreviewRevealed] = useState(false);
 
   const frame =
     HERO_SCROLL.enableProductStory && !reduceMotion
@@ -121,13 +121,17 @@ export function ProductCardRow({ storyProgress = 0 }: ProductCardRowProps) {
 
   const accordionOpen = expandT > 0.001;
 
-  if (!accordionOpen) {
-    previewRevealedRef.current = false;
-  } else if (expandT >= PRODUCT_STORY.previewRevealExpandT) {
-    previewRevealedRef.current = true;
+  // Latch: stay revealed until accordion fully closes (scroll may reverse).
+  if (!accordionOpen && previewRevealed) {
+    setPreviewRevealed(false);
+  } else if (
+    accordionOpen &&
+    expandT >= PRODUCT_STORY.previewRevealExpandT &&
+    !previewRevealed
+  ) {
+    setPreviewRevealed(true);
   }
 
-  const previewRevealed = previewRevealedRef.current;
   const previewVisible = !accordionOpen || previewRevealed;
   const heroSwapAnim =
     !reduceMotion && segmentIndex >= 1 ? "citra-hero-swap-in" : "";
